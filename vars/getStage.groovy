@@ -1,3 +1,4 @@
+
 import hudson.model.Action
 
 import com.cloudbees.workflow.flownode.FlowNodeUtil
@@ -76,4 +77,32 @@ def getBuildInformations(build){
 def getBuildCurrentStage(build){
     def data = getBuildInformations(build)
     return data.stages.get(data.stages.size() - 1);
+}
+
+
+
+stage('Stage 1') {
+    println "Current build"
+    println getBuildInformations(currentBuild)
+	
+    println "Current build stage"
+    println getBuildCurrentStage(currentBuild)
+  
+    println "Previous build"
+    println getBuildInformations(currentBuild.getPreviousBuild())
+}
+
+stage('Stage 2') {
+    println "Current build"
+    println getBuildInformations(currentBuild)
+	
+    println "Current build stage"
+    println getBuildCurrentStage(currentBuild)
+	
+    def buildOtherPipeline = build job: "Other pipeline", parameters: convertParameters(params), propagate: false
+    println "Current build for buildOtherPipeline"
+    println getBuildInformations(buildOtherPipeline)
+		  
+    println "Previous build for buildOtherPipeline"
+    println getBuildInformations(buildOtherPipeline.getPreviousBuild())
 }
