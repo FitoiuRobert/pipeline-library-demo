@@ -1,0 +1,1 @@
+def myAwesomeVar = "simple  variable"
