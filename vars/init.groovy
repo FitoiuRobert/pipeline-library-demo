@@ -7,5 +7,5 @@ class GlobalVars {
    // println GlobalVars.foo
 }
 def call(){
-  return GlobalVars
+  return GlobalVars()
 }
